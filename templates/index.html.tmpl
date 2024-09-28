@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Go Experiment</title>
+</head>
+<body>
+<h1>Hello from Fly</h1>
+{{ if .Region }}
+<h2>I'm running in the {{.Region}} region.</h2>
+{{ else }}
+<h2>I'm running locally.</h2>
+{{ end }}
+</body>
+</html>
