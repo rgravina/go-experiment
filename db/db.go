@@ -1,8 +1,8 @@
 package db
 
 import (
+	"github.com/glebarez/sqlite"
 	"go-experiment/model"
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
