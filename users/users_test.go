@@ -13,7 +13,7 @@ func TestGetUser(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/", nil)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
-	c.SetPath("/api")
+	c.SetPath("/api/users")
 	users := GetUsers(c)
 
 	if assert.NoError(t, users) {
