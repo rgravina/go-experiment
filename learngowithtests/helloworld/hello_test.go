@@ -1,4 +1,4 @@
-package learngowithtests
+package helloworld
 
 import (
 	"testing"
