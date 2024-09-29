@@ -20,7 +20,7 @@ function App() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch("http://localhost:8080/api");
+            const response = await fetch("http://localhost:8080/api/users");
             const user = await response.json();
             setUser(user);
         };
