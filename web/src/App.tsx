@@ -1,28 +1,38 @@
 import {useEffect, useState} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 interface User {
     name: String
 }
 
-function UserDetails({user}: { user: User }) {
-    return <>
-        <span>User is: {user.name}</span>
-    </>;
+function UserDetails({users}: { users: [User] }) {
+    return <div className="user-details">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {users?.map((user) => {
+                return <tr>
+                    <td>{user.name}</td>
+                </tr>
+            })
+            }
+            </tbody>
+        </table>
+    </div>
 }
 
 function App() {
-    const [count, setCount] = useState(0)
-
-    const [user, setUser] = useState<User | undefined>(undefined);
+    const [users, setUsers] = useState<[User] | undefined>(undefined);
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch("http://localhost:8080/api/users");
-            const user = await response.json();
-            setUser(user);
+            const users = await response.json();
+            setUsers(users);
         };
 
         fetchData().catch((err) => console.log(err));
@@ -31,27 +41,11 @@ function App() {
 
     return (
         <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo"/>
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo"/>
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            {user && <UserDetails user={user}/>}
+            <h1>React app served by Echo</h1>
+            <p>Here is a list of names stored in a SQLite database table:</p>
             <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
+                {users && <UserDetails users={users}/>}
             </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
         </>
     )
 }
